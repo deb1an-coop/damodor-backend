@@ -1,12 +1,13 @@
-import { Module } from '@nestjs/common';
-import { MongooseModule } from '@nestjs/mongoose';
-import { Product, ProductSchema } from './schemas/product.schema';
+import { Module } from "@nestjs/common";
+import { MongooseModule } from "@nestjs/mongoose";
+import { Product, ProductSchema } from "./schemas/product.schema";
+import * as dotenv from "dotenv";
+
+dotenv.config();
 
 @Module({
   imports: [
-    MongooseModule.forRoot(
-      `mongodb+srv://debian:lZuzJWmFLVLCFsuf@clusterd.5dl9ps5.mongodb.net/?retryWrites=true&w=majority&appName=ClusterD`,
-    ),
+    MongooseModule.forRoot(process.env.MONGODB_CONNECTION_STRING),
     MongooseModule.forFeature([{ name: Product.name, schema: ProductSchema }]),
   ],
   exports: [MongooseModule],

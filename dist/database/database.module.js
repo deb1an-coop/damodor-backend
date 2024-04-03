@@ -10,13 +10,15 @@ exports.DatabaseModule = void 0;
 const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
 const product_schema_1 = require("./schemas/product.schema");
+const dotenv = require("dotenv");
+dotenv.config();
 let DatabaseModule = class DatabaseModule {
 };
 exports.DatabaseModule = DatabaseModule;
 exports.DatabaseModule = DatabaseModule = __decorate([
     (0, common_1.Module)({
         imports: [
-            mongoose_1.MongooseModule.forRoot(`mongodb+srv://debian:lZuzJWmFLVLCFsuf@clusterd.5dl9ps5.mongodb.net/?retryWrites=true&w=majority&appName=ClusterD`),
+            mongoose_1.MongooseModule.forRoot(process.env.MONGODB_CONNECTION_STRING),
             mongoose_1.MongooseModule.forFeature([{ name: product_schema_1.Product.name, schema: product_schema_1.ProductSchema }]),
         ],
         exports: [mongoose_1.MongooseModule],
